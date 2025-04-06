@@ -109,7 +109,7 @@ function renderPratosDeSobremesas() {
 
 
 function renderPratosDeAves() {
-  pratos.carne_vermelha.forEach((p, i) => {
+  pratos.aves.forEach((p, i) => {
     document.querySelector('.cardapio').innerHTML += `
           <div class="Prato">
             <div class="l">
@@ -181,6 +181,27 @@ function RenderPrat(type) {
       renderPratosDeSobremesas();
       break;
 
+  }
+}
+
+function RemoveContent() {
+  const tags = document.querySelector('nav').querySelector(".tags");
+  tags.classList.toggle('hide')
+
+  if(!tags.classList.contains('hide')){
+    document.querySelector('.content').querySelector('button').innerHTML = `
+    <span class="material-symbols-outlined">
+remove
+</span>
+  `
+  
+  }else{
+    document.querySelector('.content').querySelector('button').innerHTML = `
+    <span class="material-symbols-outlined">
+arrow_drop_down
+</span>
+  `
+  
   }
 }
 
