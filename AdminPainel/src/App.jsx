@@ -19,7 +19,7 @@ export default function App() {
   const fetchProdutos = async () => {
     try {
       const res = await api.get('/Products');
-      if (res.data.status) setProdutos(res.data.products); // 'data.data' porque seu backend responde { data: [...] }
+      if (res.data.status) setProdutos(res.data.products);
     } catch (err) {
       console.error('Erro ao buscar produtos:', err);
     }
@@ -57,7 +57,6 @@ export default function App() {
     } catch (err) {
       console.error('Erro ao deletar produto:', err);
     }
-    
   };
 
   return (
@@ -69,7 +68,25 @@ export default function App() {
         <input name="Name" placeholder="Nome" value={form.Name} onChange={handleChange} /><br />
         <input name="Description" placeholder="Descrição" value={form.Description} onChange={handleChange} /><br />
         <input name="Price" placeholder="Preço" type="number" value={form.Price} onChange={handleChange} /><br />
-        <input name="Image" placeholder="URL da imagem" value={form.Image} onChange={handleChange} /><br />
+
+        {/* Input de imagem */}
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            if (file) {
+              const imageUrl = URL.createObjectURL(file);
+              setForm((prev) => ({ ...prev, Image: imageUrl }));
+            }
+          }}
+        /><br />
+
+        {/* Preview da imagem */}
+        {form.Image && (
+          <img src={form.Image} alt="Preview" width="100" style={{ marginTop: 10 }} />
+        )}<br />
+
         <input name="Category" placeholder="Categoria" value={form.Category} onChange={handleChange} /><br />
         <button onClick={adicionarProduto}>Salvar Produto</button>
       </div>
