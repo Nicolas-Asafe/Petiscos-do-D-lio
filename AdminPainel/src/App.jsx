@@ -57,6 +57,7 @@ export default function App() {
     } catch (err) {
       console.error('Erro ao deletar produto:', err);
     }
+    
   };
 
   return (
